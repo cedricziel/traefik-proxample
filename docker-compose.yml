@@ -1,0 +1,40 @@
+version: "2"
+services:
+    proxy:
+        build: services/proxy
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+    web1:
+        image: nginx
+        labels:
+            - traefik.port=80
+            - traefik.backend=web1
+            - traefik.frontend.rule=Host:web1.traefik.domain.tld
+    web2:
+        image: nginx
+        labels:
+            - traefik.port=80
+            - traefik.backend=web2
+            - traefik.frontend.rule=Host:web2.traefik.domain.tld
+    web3:
+        image: nginx
+        labels:
+            - traefik.port=80
+            - traefik.backend=web3
+            - traefik.frontend.rule=Host:web3.traefik.domain.tld
+    web4:
+        image: nginx
+        labels:
+            - traefik.port=80
+            - traefik.backend=web4
+            - traefik.frontend.rule=Host:web4.traefik.domain.tld
+    web5:
+        image: nginx
+        labels:
+            - traefik.port=80
+            - traefik.backend=web5
+            - traefik.frontend.rule=Host:web5.traefik.domain.tld
